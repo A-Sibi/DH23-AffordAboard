@@ -54,6 +54,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="Stay signed in"
+        android:thumbTint="@color/switch_thumb_color"
+        android:trackTint="@color/switch_track_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />

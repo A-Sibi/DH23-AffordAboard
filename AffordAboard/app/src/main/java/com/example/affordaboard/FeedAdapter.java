@@ -1,20 +1,27 @@
 package com.example.affordaboard;
 
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
 public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder> {
     private List<FeedItem> feedItems;
+    private JoinDialogFragment.JoinDialogListener listener;
 
-    public FeedAdapter(List<FeedItem> feedItems) {
+    public FeedAdapter(List<FeedItem> feedItems, JoinDialogFragment.JoinDialogListener listener) {
         this.feedItems = feedItems;
+        this.listener = listener;
     }
 
     @NonNull
@@ -31,6 +38,12 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
         holder.userName.setText(item.getUserName());
         holder.travelLocation.setText(item.getTravelLocation());
         holder.travelDates.setText(item.getTravelDates());
+
+        holder.itemView.setOnClickListener(v -> {
+            FragmentManager fm = ((FragmentActivity)v.getContext()).getSupportFragmentManager();
+            JoinDialogFragment dialog = new JoinDialogFragment(listener);
+            dialog.show(fm, "join_dialog");
+        });
     }
 
     @Override
