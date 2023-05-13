@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".newAdventure">
+
+
+    <!-- Departure Spinner Hint -->
+    <TextView
+        android:id="@+id/text_departure_hint"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Departure Country/City"
+        android:textColorHint="@android:color/darker_gray"
+        android:textSize="16sp"
+        android:padding="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp" />
+
+    <!-- Departure Spinner -->
+    <Spinner
+        android:id="@+id/spinner_departure"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:entries="@array/countries_array"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_departure_hint" />
+
+    <!-- Destination Spinner Hint -->
+    <TextView
+        android:id="@+id/text_destination_hint"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Destination Country/City"
+        android:textColorHint="@android:color/darker_gray"
+        android:textSize="16sp"
+        android:padding="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinner_departure"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp" />
+
+    <!-- Destination Spinner -->
+    <Spinner
+        android:id="@+id/spinner_destination"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:entries="@array/countries_array"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_destination_hint" />
+
+    <!-- Departure Date -->
+    <EditText
+        android:id="@+id/edit_departure_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:hint="Departure Date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_destination" />
+
+    <!-- Returning Date -->
+    <EditText
+        android:id="@+id/edit_returning_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Returning Date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_departure_date"
+        android:layout_margin="16dp" />
+
+    <!-- Number of Adult Travelers -->
+    <EditText
+        android:id="@+id/edit_adult_travelers"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="Number of Adult Travelers"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_returning_date"
+        android:layout_margin="16dp" />
+
+    <!-- Number of Children Travelers -->
+    <EditText
+        android:id="@+id/edit_children_travelers"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="Number of Children Travelers"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_adult_travelers"
+        android:layout_margin="16dp" />
+
+    <!-- Proposed Budget -->
+    <EditText
+        android:id="@+id/edit_budget"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:hint="Budget"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_children_travelers" />
+    <!-- Next Page Button -->
+
+    <!-- Previous Page Button -->
+
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:onClick="letsGo"
+        android:text="Let's go!"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.803"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_budget" />
+
+    <Button
+        android:id="@+id/btn_previous"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="59dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="83dp"
+        android:onClick="back"
+        android:text="Back"
+        app:layout_constraintEnd_toStartOf="@+id/btn_next"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_budget" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
