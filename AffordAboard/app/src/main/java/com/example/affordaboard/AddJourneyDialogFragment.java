@@ -33,7 +33,7 @@ public class AddJourneyDialogFragment extends DialogFragment {
         whenToEditText = view.findViewById(R.id.whenToEditText);
 
         numOfPeopleEditText = view.findViewById(R.id.numOfPeopleEditText);
-        numOfMulaEditText = view.findViewById(R.id.numOfPeopleEditText);
+        numOfMulaEditText = view.findViewById(R.id.numOfMulaEditText);
 
         // Adding a new journey
         builder.setView(view)
