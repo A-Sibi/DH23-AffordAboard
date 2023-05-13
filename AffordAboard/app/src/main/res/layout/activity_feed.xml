@@ -14,4 +14,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Navigation Bar -->
+    <LinearLayout
+        android:id="@+id/navigationBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:background="@color/secondaryPurple"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageButton
+            android:id="@+id/profileButton"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:background="@null"
+            android:src="@drawable/ic_profile" />
+
+        <ImageButton
+            android:id="@+id/feedButton"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:background="@null"
+            android:src="@drawable/ic_people" />
+
+        <ImageButton
+            android:id="@+id/historyButton"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:background="@null"
+            android:src="@drawable/ic_watch" />
+
+        <ImageButton
+            android:id="@+id/settingsButton"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:background="@null"
+            android:src="@drawable/ic_settings" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

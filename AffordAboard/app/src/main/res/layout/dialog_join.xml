@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@color/primaryPurple">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Do you have a vehicle?"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"/>
+
+    <CheckBox
+        android:id="@+id/vehicle_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Yes"
+        android:textColor="#FFFFFF"
+        android:buttonTint="@color/checkbox_color_selector"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Would you like to join the trip?"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"/>
+
+    <CheckBox
+        android:id="@+id/join_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Yes"
+        android:textColor="#FFFFFF"
+        android:buttonTint="@color/checkbox_color_selector"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="How many days are you available for the trip?"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/days_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/edit_text_background"
+        android:layout_marginBottom="8dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Are you comfortable sharing the expenses?"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"/>
+
+    <CheckBox
+        android:id="@+id/expenses_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Yes"
+        android:textColor="#FFFFFF"
+        android:buttonTint="@color/checkbox_color_selector"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="How many people are you traveling with?"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/people_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/edit_text_background"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Do you have any health conditions that we should be aware of?"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/health_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/edit_text_background"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="What is your contact number so we can reach you?"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"/>
+
+    <EditText
+        android:id="@+id/number_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/edit_text_background"/>
+</LinearLayout>

@@ -1,6 +1,7 @@
 package com.example.affordaboard;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,7 +10,7 @@ import android.os.Bundle;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FeedActivity extends AppCompatActivity {
+public class FeedActivity extends AppCompatActivity implements JoinDialogFragment.JoinDialogListener {
     private RecyclerView feedRecyclerView;
     private FeedAdapter feedAdapter;
     private List<FeedItem> feedItems;
@@ -26,8 +27,18 @@ public class FeedActivity extends AppCompatActivity {
         feedItems.add(new FeedItem("Anja Kuzevska", "New Jersey", "19.06.2023 - 01.10.2023"));
 
         feedRecyclerView = findViewById(R.id.feedRecyclerView);
-        feedAdapter = new FeedAdapter(feedItems);
+        feedAdapter = new FeedAdapter(feedItems, this); // Pass the listener here
         feedRecyclerView.setAdapter(feedAdapter);
         feedRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        // Handle positive button click here
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+        // Handle negative button click here
     }
 }
