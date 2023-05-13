@@ -5,8 +5,15 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ImageButton;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,17 +21,35 @@ public class FeedActivity extends AppCompatActivity implements JoinDialogFragmen
     private RecyclerView feedRecyclerView;
     private FeedAdapter feedAdapter;
     private List<FeedItem> feedItems;
+    private ImageButton addJourneyButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
 
+        addJourneyButton = findViewById(R.id.addJourneyButton);
+        addJourneyButton.setOnClickListener(v -> {
+            AddJourneyDialogFragment dialog = new AddJourneyDialogFragment();
+            dialog.show(getSupportFragmentManager(), "add_journey_dialog");
+        });
+
         feedItems = new ArrayList<>();
-        // populate the list
-        feedItems.add(new FeedItem("Jordan Lazov", "Zurich", "21.03.2023 - 26.03.2023"));
-        feedItems.add(new FeedItem("Aleksa Sibinovic", "Madeira", "04.04.2023 - 10.04.2023"));
-        feedItems.add(new FeedItem("Anja Kuzevska", "New Jersey", "19.06.2023 - 01.10.2023"));
+
+        // Getting the saved/stored data
+        Gson gson = new Gson();
+        SharedPreferences sharedPreferences = getSharedPreferences("MyApp", MODE_PRIVATE);
+        String json = sharedPreferences.getString("feedItems", null);
+        Type type = new TypeToken<ArrayList<FeedItem>>() {}.getType();
+        feedItems = gson.fromJson(json, type);
+
+        if (feedItems == null) {
+            feedItems = new ArrayList<>();
+        }
+
+        // feedItems.add(new FeedItem("Jordan Lazov", "Ljubljana - Zurich", "21.03.2023 - 26.03.2023"));
+        // feedItems.add(new FeedItem("Aleksa Sibinovic", "Ljubljana - Madeira", "04.04.2023 - 10.04.2023"));
+        // feedItems.add(new FeedItem("Anja Kuzevska", "Ljubljana - New Jersey", "19.06.2023 - 01.10.2023"));
 
         feedRecyclerView = findViewById(R.id.feedRecyclerView);
         feedAdapter = new FeedAdapter(feedItems, this); // Pass the listener here
@@ -40,5 +65,18 @@ public class FeedActivity extends AppCompatActivity implements JoinDialogFragmen
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
         // Handle negative button click here
+    }
+
+    public void addNewJourney(String travelLocation, String travelDates) {
+        SharedPreferences preferences = getSharedPreferences("MyApp", MODE_PRIVATE);
+        String email = preferences.getString("email", null);
+        String username = preferences.getString(email + "_username", null);
+        feedItems.add(new FeedItem(username, travelLocation, travelDates));
+        feedAdapter.notifyDataSetChanged();
+        Gson gson = new Gson();
+        String json = gson.toJson(feedItems);;
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("feedItems", json);
+        editor.apply();
     }
 }

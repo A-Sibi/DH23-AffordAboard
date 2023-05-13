@@ -45,11 +45,12 @@ public class SignupActivity extends AppCompatActivity {
                 } else {
                     SharedPreferences preferences = getSharedPreferences("MyApp", MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("email", email);
                     editor.putString(email + "_username", username);
                     editor.putString(email + "_password", password);
                     editor.putString(email + "_age", age);
                     editor.apply();
-                    // Toast.makeText(SignupActivity.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignupActivity.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(SignupActivity.this, SignupActivity2.class));
                 }
             }

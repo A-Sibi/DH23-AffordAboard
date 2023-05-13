@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
 public class SignupActivity2 extends AppCompatActivity {
 
@@ -37,6 +38,7 @@ public class SignupActivity2 extends AppCompatActivity {
                 // Add logic to store these values or pass them to the next activity
 
                 // Move to the next activity
+                Toast.makeText(SignupActivity2.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(SignupActivity2.this, LoginActivity.class));
             }
         });

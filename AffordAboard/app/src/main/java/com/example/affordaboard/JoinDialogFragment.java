@@ -13,7 +13,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
 public class JoinDialogFragment extends DialogFragment {
-    // Define view variables here
     private CheckBox vehicleCheckbox;
     private CheckBox joinCheckbox;
     private EditText daysEditText;

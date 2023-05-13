@@ -44,6 +44,22 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
             JoinDialogFragment dialog = new JoinDialogFragment(listener);
             dialog.show(fm, "join_dialog");
         });
+
+        // For deleting items
+        holder.itemView.setOnLongClickListener(v -> {
+            new AlertDialog.Builder(v.getContext())
+                    .setTitle("Delete Journey")
+                    .setMessage("Are you sure you want to delete this journey?")
+                    .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+                        feedItems.remove(position);
+                        notifyDataSetChanged();
+                    })
+                    .setNegativeButton(android.R.string.no, null)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+
+            return true;
+        });
     }
 
     @Override
