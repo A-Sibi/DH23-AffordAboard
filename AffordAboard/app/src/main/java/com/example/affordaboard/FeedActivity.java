@@ -67,11 +67,11 @@ public class FeedActivity extends AppCompatActivity implements JoinDialogFragmen
         // Handle negative button click here
     }
 
-    public void addNewJourney(String travelLocation, String travelDates) {
+    public void addNewJourney(String travelLocation, String travelDates, String numOfPeople, String numOfMula) {
         SharedPreferences preferences = getSharedPreferences("MyApp", MODE_PRIVATE);
         String email = preferences.getString("email", null);
         String username = preferences.getString(email + "_username", null);
-        feedItems.add(new FeedItem(username, travelLocation, travelDates));
+        feedItems.add(new FeedItem(username, travelLocation, travelDates, numOfPeople, numOfMula));
         feedAdapter.notifyDataSetChanged();
         Gson gson = new Gson();
         String json = gson.toJson(feedItems);;

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
@@ -15,6 +16,9 @@ public class AddJourneyDialogFragment extends DialogFragment {
     private EditText whereToEditText;
     private EditText whenFromEditText;
     private EditText whenToEditText;
+
+    private EditText numOfPeopleEditText;
+    private EditText numOfMulaEditText;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -28,13 +32,19 @@ public class AddJourneyDialogFragment extends DialogFragment {
         whenFromEditText = view.findViewById(R.id.whenFromEditText);
         whenToEditText = view.findViewById(R.id.whenToEditText);
 
+        numOfPeopleEditText = view.findViewById(R.id.numOfPeopleEditText);
+        numOfMulaEditText = view.findViewById(R.id.numOfPeopleEditText);
+
+        // Adding a new journey
         builder.setView(view)
                 .setPositiveButton("Submit", (dialog, id) -> {
                     String travelLocation = whereFromEditText.getText().toString() + " - " + whereToEditText.getText().toString();
                     String travelDates = whenFromEditText.getText().toString() + " - " + whenToEditText.getText().toString();
+                    String numberOfPeople = numOfPeopleEditText.getText().toString();
+                    String young_mula_baby = numOfMulaEditText.getText().toString();
 
                     FeedActivity activity = (FeedActivity) getActivity();
-                    activity.addNewJourney(travelLocation, travelDates);
+                    activity.addNewJourney(travelLocation, travelDates, numberOfPeople, young_mula_baby);
                 })
                 .setNegativeButton("Cancel", (dialog, id) -> AddJourneyDialogFragment.this.getDialog().cancel());
 

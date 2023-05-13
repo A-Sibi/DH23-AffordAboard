@@ -72,6 +72,8 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
         TextView userName;
         TextView travelLocation;
         TextView travelDates;
+        TextView numOfPeople;
+        TextView numOfMula;
 
         public FeedViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -79,6 +81,8 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
             userName = itemView.findViewById(R.id.userName);
             travelLocation = itemView.findViewById(R.id.travelLocation);
             travelDates = itemView.findViewById(R.id.travelDates);
+            numOfPeople= itemView.findViewById(R.id.numOfPeople);
+            numOfMula = itemView.findViewById(R.id.numOfMula);
         }
     }
 }

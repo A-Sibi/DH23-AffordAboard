@@ -32,6 +32,7 @@
                 android:text="Name Surname"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -53,6 +54,26 @@
                 android:text="Travel Location"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/peopleIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_people"
+                android:layout_marginEnd="10dp" />
+
+            <TextView
+                android:id="@+id/numOfPeople"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Number of people"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -74,6 +95,26 @@
                 android:text="From - To"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/mulaIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_mula"
+                android:layout_marginEnd="10dp" />
+
+            <TextView
+                android:id="@+id/numOfMula"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Number of money"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
         </LinearLayout>
 
     </LinearLayout>
