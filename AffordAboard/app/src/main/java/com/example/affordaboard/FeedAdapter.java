@@ -1,5 +1,7 @@
 package com.example.affordaboard;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -38,6 +42,8 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
         holder.userName.setText(item.getUserName());
         holder.travelLocation.setText(item.getTravelLocation());
         holder.travelDates.setText(item.getTravelDates());
+        holder.numOfPeople.setText(item.getNumOfPeople());
+        holder.numOfMula.setText(item.getNumOfMula());
 
         holder.itemView.setOnClickListener(v -> {
             FragmentManager fm = ((FragmentActivity)v.getContext()).getSupportFragmentManager();
@@ -51,8 +57,15 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
                     .setTitle("Delete Journey")
                     .setMessage("Are you sure you want to delete this journey?")
                     .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+                        // Remove the item from the list and notify the adapter
                         feedItems.remove(position);
-                        notifyDataSetChanged();
+                        notifyItemRemoved(position);
+
+                        // Update SharedPreferences
+                        SharedPreferences preferences = v.getContext().getSharedPreferences("MyApp", Context.MODE_PRIVATE);
+                        Gson gson = new Gson();
+                        String json = gson.toJson(feedItems);
+                        preferences.edit().putString("feedItems", json).apply();
                     })
                     .setNegativeButton(android.R.string.no, null)
                     .setIcon(android.R.drawable.ic_dialog_alert)
@@ -84,5 +97,9 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
             numOfPeople= itemView.findViewById(R.id.numOfPeople);
             numOfMula = itemView.findViewById(R.id.numOfMula);
         }
+    }
+
+    private String getSharedPreferencesKeyForItem(FeedItem item) {
+        return item.getUserName() + "_" + item.getTravelLocation() + "_" + item.getTravelDates();
     }
 }

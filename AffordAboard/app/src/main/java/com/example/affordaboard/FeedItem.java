@@ -1,6 +1,9 @@
 package com.example.affordaboard;
 
+import java.util.UUID;
+
 public class FeedItem {
+    private String id;
     private String userName;
     private String travelLocation;
     private String travelDates;
@@ -9,6 +12,7 @@ public class FeedItem {
 
     // Constructor, getters and setters
     public FeedItem(String userName, String travelLocation, String travelDates, String numOfPeople, String numOfMula) {
+        this.id = UUID.randomUUID().toString();
         this.userName = userName;
         this.travelLocation = travelLocation;
         this.travelDates = travelDates;
@@ -54,5 +58,9 @@ public class FeedItem {
 
     public void setNumOfMula(String numOfMula) {
         this.numOfMula = numOfMula;
+    }
+
+    public String getId() {
+        return id;
     }
 }
