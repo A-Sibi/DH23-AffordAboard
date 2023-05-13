@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     if (storedPassword != null && storedPassword.equals(password)) {
                         Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                        // startActivity(new Intent(LoginActivity.this, NavigationActivity.class));
+                        startActivity(new Intent(LoginActivity.this, FeedActivity.class));
                     } else {
                         Toast.makeText(LoginActivity.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
                     }
