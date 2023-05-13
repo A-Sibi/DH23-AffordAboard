@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
                 } else {
                     SharedPreferences preferences = getSharedPreferences("MyApp", MODE_PRIVATE);
-                    String storedPassword = preferences.getString(email, null);
+                    String storedPassword = preferences.getString(email + "_password", null);
 
                     if (storedPassword != null && storedPassword.equals(password)) {
                         Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();

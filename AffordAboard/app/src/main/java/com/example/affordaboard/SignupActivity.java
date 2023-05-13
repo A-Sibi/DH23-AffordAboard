@@ -22,19 +22,21 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
 
         // To make the logo look like it's breathing
-        ImageView rectangleBackground = findViewById(R.id.rectangleBackground);
-        Animation breathingAnimation = AnimationUtils.loadAnimation(this, R.anim.breathing_animation);
-        rectangleBackground.startAnimation(breathingAnimation);
+        // ImageView rectangleBackground = findViewById(R.id.rectangleBackground);
+        // Animation breathingAnimation = AnimationUtils.loadAnimation(this, R.anim.breathing_animation);
+        // rectangleBackground.startAnimation(breathingAnimation);
 
         // For the signup button to switch to LoginActivity
-        Button navigationButton = findViewById(R.id.navigationButton);
+        Button navigationButton = findViewById(R.id.secondSignupPageButton);
 
         navigationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String username = ((EditText) findViewById(R.id.usernameEditText)).getText().toString();
                 String email = ((EditText) findViewById(R.id.emailEditText)).getText().toString();
                 String password = ((EditText) findViewById(R.id.passwordEditText)).getText().toString();
                 String confirmPassword = ((EditText) findViewById(R.id.confirmPasswordEditText)).getText().toString();
+                String age = ((EditText) findViewById(R.id.ageEditText)).getText().toString();
 
                 if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)) {
                     Toast.makeText(SignupActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
@@ -43,10 +45,12 @@ public class SignupActivity extends AppCompatActivity {
                 } else {
                     SharedPreferences preferences = getSharedPreferences("MyApp", MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString(email, password);
+                    editor.putString(email + "_username", username);
+                    editor.putString(email + "_password", password);
+                    editor.putString(email + "_age", age);
                     editor.apply();
-                    Toast.makeText(SignupActivity.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+                    // Toast.makeText(SignupActivity.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(SignupActivity.this, SignupActivity2.class));
                 }
             }
         });
