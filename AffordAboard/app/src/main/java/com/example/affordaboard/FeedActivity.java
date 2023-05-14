@@ -26,6 +26,7 @@ public class FeedActivity extends AppCompatActivity implements JoinDialogFragmen
     private List<FeedItem> feedItems;
     private ImageButton addJourneyButton;
     private ImageButton profileButton;
+    private ImageButton historyButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +37,6 @@ public class FeedActivity extends AppCompatActivity implements JoinDialogFragmen
         addJourneyButton.setOnClickListener(v -> {
             AddJourneyDialogFragment dialog = new AddJourneyDialogFragment();
             dialog.show(getSupportFragmentManager(), "add_journey_dialog");
-        });
-
-        profileButton = findViewById(R.id.profileButton);
-        profileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(FeedActivity.this, ProfileActivity.class));
-            }
         });
 
         feedItems = new ArrayList<>();
@@ -67,6 +60,23 @@ public class FeedActivity extends AppCompatActivity implements JoinDialogFragmen
         feedAdapter = new FeedAdapter(feedItems, this); // Pass the listener here
         feedRecyclerView.setAdapter(feedAdapter);
         feedRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Switching between activities
+        profileButton = findViewById(R.id.profileButton);
+        profileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(FeedActivity.this, ProfileActivity.class));
+            }
+        });
+
+        historyButton = findViewById(R.id.historyButton);
+        historyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(FeedActivity.this, HistoryActivity.class));
+            }
+        });
     }
 
     @Override

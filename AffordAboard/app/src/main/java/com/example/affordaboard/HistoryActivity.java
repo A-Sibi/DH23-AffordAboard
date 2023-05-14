@@ -23,28 +23,19 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ProfileActivity extends AppCompatActivity {
+public class HistoryActivity extends AppCompatActivity {
 
-    private TextView textViewTitle, textViewName, textViewCurrentLocation, textViewAge, textViewType;
-    private ImageView imageViewProfile;
-    private Button buttonChangePicture, buttonEditProfile;
-    private RecyclerView profileRecyclerView;
-    private ProfileAdapter profileAdapter;
+    private RecyclerView historyRecyclerView;
+    private HistoryAdapter historyAdapter;
     private List<FeedItem> journeyList;
     private ImageButton profileButton, feedButton, historyButton, settingsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_history); // make sure you have a layout named 'activity_history'
 
         initializeViews();
-
-        // Set user data
-        textViewName.setText("Jordan Lazov");
-        textViewCurrentLocation.setText("Ljubljana, Slovenia");
-        textViewAge.setText("21");
-        textViewType.setText("Very active");
 
         // Retrieve and process the user's journeys
         SharedPreferences preferences = getSharedPreferences("MyApp", MODE_PRIVATE);
@@ -58,16 +49,16 @@ public class ProfileActivity extends AppCompatActivity {
             feedItems = new ArrayList<>();
         }
 
-        // Convert FeedItems to UpcomingJourneys and add to list
+        // Convert FeedItems to PastJourneys and add to list
         List<FeedItem> journeys = new ArrayList<>();
         for (FeedItem feedItem : feedItems) {
-            // Check if the journey's date is after today's date
+            // Check if the journey's date is before today's date
             String endDate = feedItem.getTravelDates().split(" - ")[1];
             SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
             try {
                 Date journeyEndDate = format.parse(endDate);
                 Date currentDate = new Date();
-                if (journeyEndDate.after(currentDate)) {
+                if (journeyEndDate.before(currentDate)) {
                     String username = preferences.getString(email + "_username", null);
                     String destination = feedItem.getTravelLocation();
                     String dates = feedItem.getTravelDates();
@@ -81,39 +72,30 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         // Set RecyclerView
-        profileAdapter = new ProfileAdapter(journeys);
-        profileRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        profileRecyclerView.setAdapter(profileAdapter);
+        historyAdapter = new HistoryAdapter(journeys);
+        historyRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        historyRecyclerView.setAdapter(historyAdapter);
 
-        // Buttons for switching between activites
+        // Buttons for switching between activities
         feedButton = findViewById(R.id.feedButton);
         feedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ProfileActivity.this, FeedActivity.class));
+                startActivity(new Intent(HistoryActivity.this, FeedActivity.class));
             }
         });
 
-        // Buttons for switching between activites
-        historyButton = findViewById(R.id.historyButton);
-        historyButton.setOnClickListener(new View.OnClickListener() {
+        profileButton = findViewById(R.id.profileButton);
+        profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ProfileActivity.this, HistoryActivity.class));
+                startActivity(new Intent(HistoryActivity.this, ProfileActivity.class));
             }
         });
     }
 
     private void initializeViews() {
-        textViewTitle = findViewById(R.id.textViewTitle);
-        textViewName = findViewById(R.id.textViewName);
-        textViewCurrentLocation = findViewById(R.id.textViewCurrentLocation);
-        textViewAge = findViewById(R.id.textViewAge);
-        textViewType = findViewById(R.id.textViewType);
-        imageViewProfile = findViewById(R.id.imageViewProfile);
-        buttonChangePicture = findViewById(R.id.buttonChangePicture);
-        buttonEditProfile = findViewById(R.id.buttonEditProfile);
-        profileRecyclerView = findViewById(R.id.profileRecyclerView);
+        historyRecyclerView = findViewById(R.id.historyRecyclerView);
     }
 
     @Override
@@ -138,7 +120,7 @@ public class ProfileActivity extends AppCompatActivity {
             try {
                 Date journeyEndDate = format.parse(endDate);
                 Date currentDate = new Date();
-                if (journeyEndDate.after(currentDate)) {
+                if (journeyEndDate.before(currentDate)) {
                     String username = preferences.getString(email + "_username", null);
                     String destination = feedItem.getTravelLocation();
                     String dates = feedItem.getTravelDates();
@@ -152,7 +134,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         // Set RecyclerView
-        profileAdapter = new ProfileAdapter(journeys);
-        profileRecyclerView.setAdapter(profileAdapter);
+        historyAdapter = new HistoryAdapter(journeys);
+        historyRecyclerView.setAdapter(historyAdapter);
     }
 }
