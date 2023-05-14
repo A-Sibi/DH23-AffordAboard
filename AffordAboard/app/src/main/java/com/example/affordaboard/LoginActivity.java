@@ -17,19 +17,11 @@ import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // To make the logo look like it's breathing
-        // ImageView rectangleBackground = findViewById(R.id.rectangleBackground);
-        // Animation breathingAnimation = AnimationUtils.loadAnimation(this, R.anim.breathing_animation);
-        // rectangleBackground.startAnimation(breathingAnimation);
-
-        // For the login button to switch to LoginActivity
         Button navigationButton = findViewById(R.id.navigationButton);
 
         navigationButton.setOnClickListener(new View.OnClickListener() {
@@ -37,6 +29,12 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = ((EditText) findViewById(R.id.emailEditText)).getText().toString();
                 String password = ((EditText) findViewById(R.id.passwordEditText)).getText().toString();
+
+                // Check if the email is valid
+                if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    Toast.makeText(LoginActivity.this, "Invalid email", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
                     Toast.makeText(LoginActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();

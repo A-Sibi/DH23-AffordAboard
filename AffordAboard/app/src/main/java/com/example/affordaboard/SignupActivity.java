@@ -21,12 +21,6 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        // To make the logo look like it's breathing
-        // ImageView rectangleBackground = findViewById(R.id.rectangleBackground);
-        // Animation breathingAnimation = AnimationUtils.loadAnimation(this, R.anim.breathing_animation);
-        // rectangleBackground.startAnimation(breathingAnimation);
-
-        // For the signup button to switch to LoginActivity
         Button navigationButton = findViewById(R.id.secondSignupPageButton);
 
         navigationButton.setOnClickListener(new View.OnClickListener() {
@@ -37,6 +31,19 @@ public class SignupActivity extends AppCompatActivity {
                 String password = ((EditText) findViewById(R.id.passwordEditText)).getText().toString();
                 String confirmPassword = ((EditText) findViewById(R.id.confirmPasswordEditText)).getText().toString();
                 String age = ((EditText) findViewById(R.id.ageEditText)).getText().toString();
+
+                // Check if the username is a valid first name and last name
+                String regex = "^[\\p{L} .'-]+$";
+                if (!username.matches(regex)) {
+                    Toast.makeText(SignupActivity.this, "Invalid username", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Check if the email is valid
+                if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    Toast.makeText(SignupActivity.this, "Invalid email", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)) {
                     Toast.makeText(SignupActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
