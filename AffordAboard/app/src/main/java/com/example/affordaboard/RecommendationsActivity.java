@@ -143,7 +143,9 @@ public class RecommendationsActivity extends AppCompatActivity {
         feedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(RecommendationsActivity.this, FeedActivity.class));
+                Intent intent = new Intent(RecommendationsActivity.this, FeedActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         });
 
@@ -152,7 +154,9 @@ public class RecommendationsActivity extends AppCompatActivity {
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(RecommendationsActivity.this, ProfileActivity.class));
+                Intent intent = new Intent(RecommendationsActivity.this, ProfileActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         });
     }
