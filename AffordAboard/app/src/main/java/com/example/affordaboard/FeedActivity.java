@@ -66,8 +66,9 @@ public class FeedActivity extends AppCompatActivity implements JoinDialogFragmen
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(FeedActivity.this, ProfileActivity.class));
-            }
+                Intent intent = new Intent(FeedActivity.this, ProfileActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);            }
         });
 
         // Switching between activities
@@ -75,7 +76,9 @@ public class FeedActivity extends AppCompatActivity implements JoinDialogFragmen
         recButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(FeedActivity.this, RecommendationsActivity.class));
+                Intent intent = new Intent(FeedActivity.this, RecommendationsActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         });
     }
