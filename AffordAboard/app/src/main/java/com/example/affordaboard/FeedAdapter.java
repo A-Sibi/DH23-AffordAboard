@@ -65,7 +65,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
                         System.out.println("position: " + position);
                         feedItems.remove(position);
                         System.out.println("feedItems after remove(position): " + feedItems);
-                        notifyItemRemoved(position);
+                        notifyDataSetChanged();
 
                         // Update SharedPreferences
                         SharedPreferences preferences = v.getContext().getSharedPreferences("MyApp", Context.MODE_PRIVATE);

@@ -127,9 +127,15 @@ public class RecommendationsActivity extends AppCompatActivity {
             // Adjust price based on comfortScore
             int minPrice = 50; // Define a minimum price
             int maxPrice = 10000; // Define a maximum price
-            int priceRange = maxPrice - minPrice;
-            int comfortAdjustedRange = comfortScore * priceRange / 100; // Adjust the price range based on comfortScore
-            int price = minPrice + random.nextInt(comfortAdjustedRange + 1); // Generate a price in the adjusted range
+            int meanPrice = minPrice + (comfortScore * (maxPrice - minPrice) / 100); // Mean price adjusted based on comfortScore
+            int standardDeviation = (maxPrice - meanPrice) / 3; // Standard deviation adjusted based on comfortScore
+
+            // Generate a normally distributed price in the adjusted range
+            int price;
+            do {
+                price = (int) (random.nextGaussian() * standardDeviation + meanPrice); // Generate a normally distributed price
+            } while (price < minPrice || price > maxPrice); // Retry if the price is out of range
+
             String numOfMula = String.valueOf(price);
 
             // Create a recommendation and add it to the list

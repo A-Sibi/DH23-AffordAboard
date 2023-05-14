@@ -52,10 +52,6 @@ public class FeedActivity extends AppCompatActivity implements JoinDialogFragmen
             feedItems = new ArrayList<>();
         }
 
-        // feedItems.add(new FeedItem("Jordan Lazov", "Ljubljana - Zurich", "21.03.2023 - 26.03.2023"));
-        // feedItems.add(new FeedItem("Aleksa Sibinovic", "Ljubljana - Madeira", "04.04.2023 - 10.04.2023"));
-        // feedItems.add(new FeedItem("Anja Kuzevska", "Ljubljana - New Jersey", "19.06.2023 - 01.10.2023"));
-
         feedRecyclerView = findViewById(R.id.feedRecyclerView);
         feedAdapter = new FeedAdapter(feedItems, this); // Pass the listener here
         feedRecyclerView.setAdapter(feedAdapter);
