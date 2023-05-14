@@ -3,6 +3,7 @@ package com.example.affordaboard;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -33,9 +34,16 @@ public class SignupActivity2 extends AppCompatActivity {
                 int unexpectedScore = unexpectedSeekBar.getProgress();
                 int comfortScore = comfortSeekBar.getProgress();
                 boolean hasVehicle = vehicleCheckbox.isChecked();
-                // String instagramLink = instagramEditText.getText().toString();
 
-                // Add logic to store these values or pass them to the next activity
+                SharedPreferences preferences = getSharedPreferences("MyApp", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                String email = preferences.getString("email", null);
+                editor.putString(email + "_sportspersonScore", String.valueOf(sportspersonScore));
+                editor.putString(email + "_unexpectedScore", String.valueOf(unexpectedScore));
+                editor.putString(email + "_comfortScore", String.valueOf(comfortScore));
+                editor.putString(email + "_hasVehicle", String.valueOf(hasVehicle));
+
+                editor.apply();
 
                 // Move to the next activity
                 Toast.makeText(SignupActivity2.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();

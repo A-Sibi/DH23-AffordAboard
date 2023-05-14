@@ -44,11 +44,11 @@
             android:layout_weight="1" />
 
         <ImageButton
-            android:id="@+id/historyButton"
+            android:id="@+id/recommendationsButton"
             android:layout_width="90dp"
             android:layout_height="50dp"
             android:background="@null"
-            android:src="@drawable/ic_watch" />
+            android:src="@drawable/ic_flight" />
 
         <ImageButton
             android:id="@+id/settingsButton"

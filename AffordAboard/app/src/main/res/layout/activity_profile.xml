@@ -19,23 +19,24 @@
 
     <ImageView
         android:id="@+id/imageViewProfile"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/ic_profile_black"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_weight="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/profilna" />
 
     <TextView
         android:id="@+id/textViewName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         android:layout_marginEnd="16dp"
-        android:text="Anja Kuzevska"
-        android:textSize="18sp"
+        android:text="FirstName LastName"
         android:textColor="@color/white"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageViewProfile"
         app:layout_constraintTop_toTopOf="@+id/imageViewProfile" />
@@ -102,7 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="Ljubljana, Slovenia"
+                android:text="City, Country"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -125,7 +126,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="20"
+                android:text="XX"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -148,7 +149,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="Very active"
+                android:text="Status"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -162,9 +163,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/infoLayout"
-        android:padding="16dp">
+        app:layout_constraintTop_toBottomOf="@+id/infoLayout">
 
         <TextView
             android:id="@+id/textcheViewType"
@@ -180,9 +182,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="10dp"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
 
     <LinearLayout
@@ -214,11 +216,11 @@
             android:layout_weight="1" />
 
         <ImageButton
-            android:id="@+id/historyButton"
+            android:id="@+id/recommendationsButton"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:background="@null"
-            android:src="@drawable/ic_watch" />
+            android:src="@drawable/ic_flight" />
 
         <ImageButton
             android:id="@+id/settingsButton"

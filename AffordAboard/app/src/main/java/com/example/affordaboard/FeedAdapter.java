@@ -61,7 +61,10 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
                     .setMessage("Are you sure you want to delete this journey?")
                     .setPositiveButton(android.R.string.yes, (dialog, which) -> {
                         // Remove the item from the list and notify the adapter
+                        System.out.println("feedItems before remove(position): " + feedItems);
+                        System.out.println("position: " + position);
                         feedItems.remove(position);
+                        System.out.println("feedItems after remove(position): " + feedItems);
                         notifyItemRemoved(position);
 
                         // Update SharedPreferences
@@ -77,6 +80,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
                         String jsonCurrentUserFeedItems = preferences.getString(email + "_feedItems", null);
                         Type type = new TypeToken<ArrayList<FeedItem>>() {}.getType();
                         List<FeedItem> currentUserFeedItems = gson.fromJson(jsonCurrentUserFeedItems, type);
+                        System.out.println("currentUserFeedItems before remove(position): " + currentUserFeedItems);
                         currentUserFeedItems.remove(position);
                         jsonCurrentUserFeedItems = gson.toJson(currentUserFeedItems);
                         preferences.edit().putString(email + "_feedItems", jsonCurrentUserFeedItems).apply();

@@ -26,7 +26,7 @@ public class FeedActivity extends AppCompatActivity implements JoinDialogFragmen
     private List<FeedItem> feedItems;
     private ImageButton addJourneyButton;
     private ImageButton profileButton;
-    private ImageButton historyButton;
+    private ImageButton recButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,11 +70,12 @@ public class FeedActivity extends AppCompatActivity implements JoinDialogFragmen
             }
         });
 
-        historyButton = findViewById(R.id.historyButton);
-        historyButton.setOnClickListener(new View.OnClickListener() {
+        // Switching between activities
+        recButton = findViewById(R.id.recommendationsButton);
+        recButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(FeedActivity.this, HistoryActivity.class));
+                startActivity(new Intent(FeedActivity.this, RecommendationsActivity.class));
             }
         });
     }

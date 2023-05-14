@@ -4,9 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -16,6 +20,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,7 +36,7 @@ public class ProfileActivity extends AppCompatActivity {
     private RecyclerView profileRecyclerView;
     private ProfileAdapter profileAdapter;
     private List<FeedItem> journeyList;
-    private ImageButton profileButton, feedButton, historyButton, settingsButton;
+    private ImageButton profileButton, feedButton, settingsButton, recButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,19 +45,25 @@ public class ProfileActivity extends AppCompatActivity {
 
         initializeViews();
 
+        // Load and set the profile picture
+        SharedPreferences preferences = getSharedPreferences("MyApp", MODE_PRIVATE);
+        String email = preferences.getString("email", null);
+
         // Set user data
-        textViewName.setText("Jordan Lazov");
         textViewCurrentLocation.setText("Ljubljana, Slovenia");
-        textViewAge.setText("21");
         textViewType.setText("Very active");
 
         // Retrieve and process the user's journeys
-        SharedPreferences preferences = getSharedPreferences("MyApp", MODE_PRIVATE);
-        String email = preferences.getString("email", null);
+        preferences = getSharedPreferences("MyApp", MODE_PRIVATE);
+        email = preferences.getString("email", null);
         Gson gson = new Gson();
         String json = preferences.getString(email + "_feedItems", null);
         Type type = new TypeToken<ArrayList<FeedItem>>() {}.getType();
         List<FeedItem> feedItems = gson.fromJson(json, type);
+
+        // Setting the profile info according to the user
+        textViewName.setText(preferences.getString(email + "_username", null));
+        textViewAge.setText(preferences.getString(email + "_age", null));
 
         if (feedItems == null) {
             feedItems = new ArrayList<>();
@@ -94,14 +105,15 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        // Buttons for switching between activites
-        historyButton = findViewById(R.id.historyButton);
-        historyButton.setOnClickListener(new View.OnClickListener() {
+        // Switching between activities
+        recButton = findViewById(R.id.recommendationsButton);
+        recButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ProfileActivity.this, HistoryActivity.class));
+                startActivity(new Intent(ProfileActivity.this, RecommendationsActivity.class));
             }
         });
+
     }
 
     private void initializeViews() {
@@ -155,4 +167,6 @@ public class ProfileActivity extends AppCompatActivity {
         profileAdapter = new ProfileAdapter(journeys);
         profileRecyclerView.setAdapter(profileAdapter);
     }
+
+
 }
