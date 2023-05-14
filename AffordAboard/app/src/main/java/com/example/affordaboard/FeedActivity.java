@@ -5,10 +5,13 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -22,6 +25,7 @@ public class FeedActivity extends AppCompatActivity implements JoinDialogFragmen
     private FeedAdapter feedAdapter;
     private List<FeedItem> feedItems;
     private ImageButton addJourneyButton;
+    private ImageButton profileButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,14 @@ public class FeedActivity extends AppCompatActivity implements JoinDialogFragmen
         addJourneyButton.setOnClickListener(v -> {
             AddJourneyDialogFragment dialog = new AddJourneyDialogFragment();
             dialog.show(getSupportFragmentManager(), "add_journey_dialog");
+        });
+
+        profileButton = findViewById(R.id.profileButton);
+        profileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(FeedActivity.this, ProfileActivity.class));
+            }
         });
 
         feedItems = new ArrayList<>();
@@ -71,12 +83,27 @@ public class FeedActivity extends AppCompatActivity implements JoinDialogFragmen
         SharedPreferences preferences = getSharedPreferences("MyApp", MODE_PRIVATE);
         String email = preferences.getString("email", null);
         String username = preferences.getString(email + "_username", null);
-        feedItems.add(new FeedItem(username, travelLocation, travelDates, numOfPeople, numOfMula));
+        FeedItem newFeedItem = new FeedItem(username, travelLocation, travelDates, numOfPeople, numOfMula);
+        feedItems.add(newFeedItem);
         feedAdapter.notifyDataSetChanged();
         Gson gson = new Gson();
-        String json = gson.toJson(feedItems);;
+        String json = gson.toJson(feedItems);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("feedItems", json);
+
+        // Save the current user's FeedItems
+        String jsonCurrentUserFeedItems = preferences.getString(email + "_feedItems", null);
+        List<FeedItem> currentUserFeedItems;
+        if (jsonCurrentUserFeedItems == null) {
+            currentUserFeedItems = new ArrayList<>();
+        } else {
+            Type type = new TypeToken<ArrayList<FeedItem>>() {}.getType();
+            currentUserFeedItems = gson.fromJson(jsonCurrentUserFeedItems, type);
+        }
+        currentUserFeedItems.add(newFeedItem);
+        jsonCurrentUserFeedItems = gson.toJson(currentUserFeedItems);
+        editor.putString(email + "_feedItems", jsonCurrentUserFeedItems);
+
         editor.apply();
     }
 }

@@ -16,7 +16,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder> {
@@ -63,9 +66,20 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
 
                         // Update SharedPreferences
                         SharedPreferences preferences = v.getContext().getSharedPreferences("MyApp", Context.MODE_PRIVATE);
+                        String email = preferences.getString("email", null);
                         Gson gson = new Gson();
+
+                        // Update "feedItems"
                         String json = gson.toJson(feedItems);
                         preferences.edit().putString("feedItems", json).apply();
+
+                        // Update "email + "_feedItems""
+                        String jsonCurrentUserFeedItems = preferences.getString(email + "_feedItems", null);
+                        Type type = new TypeToken<ArrayList<FeedItem>>() {}.getType();
+                        List<FeedItem> currentUserFeedItems = gson.fromJson(jsonCurrentUserFeedItems, type);
+                        currentUserFeedItems.remove(position);
+                        jsonCurrentUserFeedItems = gson.toJson(currentUserFeedItems);
+                        preferences.edit().putString(email + "_feedItems", jsonCurrentUserFeedItems).apply();
                     })
                     .setNegativeButton(android.R.string.no, null)
                     .setIcon(android.R.drawable.ic_dialog_alert)
@@ -97,9 +111,5 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
             numOfPeople= itemView.findViewById(R.id.numOfPeople);
             numOfMula = itemView.findViewById(R.id.numOfMula);
         }
-    }
-
-    private String getSharedPreferencesKeyForItem(FeedItem item) {
-        return item.getUserName() + "_" + item.getTravelLocation() + "_" + item.getTravelDates();
     }
 }
