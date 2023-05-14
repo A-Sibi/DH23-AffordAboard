@@ -41,7 +41,6 @@ public class EditStatsActivity extends AppCompatActivity {
                 editor.putInt(email + "_sportspersonScore", sportspersonScore);
                 editor.putInt(email + "_unexpectedScore", unexpectedScore);
                 editor.putInt(email + "_comfortScore", comfortScore);
-                editor.putBoolean(email + "_hasVehicle", hasVehicle);
 
                 editor.apply();
 

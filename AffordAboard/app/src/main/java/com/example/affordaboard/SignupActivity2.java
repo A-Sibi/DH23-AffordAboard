@@ -33,15 +33,13 @@ public class SignupActivity2 extends AppCompatActivity {
                 int sportspersonScore = sportspersonSeekBar.getProgress();
                 int unexpectedScore = unexpectedSeekBar.getProgress();
                 int comfortScore = comfortSeekBar.getProgress();
-                boolean hasVehicle = vehicleCheckbox.isChecked();
 
                 SharedPreferences preferences = getSharedPreferences("MyApp", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 String email = preferences.getString("email", null);
-                editor.putString(email + "_sportspersonScore", String.valueOf(sportspersonScore));
-                editor.putString(email + "_unexpectedScore", String.valueOf(unexpectedScore));
-                editor.putString(email + "_comfortScore", String.valueOf(comfortScore));
-                editor.putString(email + "_hasVehicle", String.valueOf(hasVehicle));
+                editor.putInt(email + "_sportspersonScore", sportspersonScore);
+                editor.putInt(email + "_unexpectedScore", unexpectedScore);
+                editor.putInt(email + "_comfortScore", comfortScore);
 
                 editor.apply();
 
