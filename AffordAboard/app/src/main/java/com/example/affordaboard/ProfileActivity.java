@@ -114,6 +114,14 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        // Switching between activities
+        buttonEditProfile = findViewById(R.id.buttonEditProfile);
+        buttonEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ProfileActivity.this, EditStatsActivity.class));
+            }
+        });
     }
 
     private void initializeViews() {

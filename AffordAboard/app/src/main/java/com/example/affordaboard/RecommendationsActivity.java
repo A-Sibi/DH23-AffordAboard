@@ -39,9 +39,10 @@ public class RecommendationsActivity extends AppCompatActivity {
         // Retrieve user preferences
         SharedPreferences preferences = getSharedPreferences("MyApp", MODE_PRIVATE);
         String email = preferences.getString("email", null);
-        int sportspersonScore = preferences.getInt(email + "_sportspersonScore", 0);
-        int unexpectedScore = preferences.getInt(email + "_unexpectedScore", 0);
-        int comfortScore = preferences.getInt(email + "_comfortScore", 0);
+        int sportspersonScore = Integer.parseInt(preferences.getString(email + "_sportspersonScore", "0"));
+        int unexpectedScore = Integer.parseInt(preferences.getString(email + "_unexpectedScore", "0"));
+        int comfortScore = Integer.parseInt(preferences.getString(email + "_comfortScore", "0"));
+        boolean hasVehicle = Boolean.parseBoolean(preferences.getString(email + "_hasVehicle", "false"));
 
         // Define lists of city types
         List<String> sportsCities = Arrays.asList(

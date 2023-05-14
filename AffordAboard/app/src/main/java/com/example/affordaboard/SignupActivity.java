@@ -50,7 +50,6 @@ public class SignupActivity extends AppCompatActivity {
                     editor.putString(email + "_password", password);
                     editor.putString(email + "_age", age);
                     editor.apply();
-                    Toast.makeText(SignupActivity.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(SignupActivity.this, SignupActivity2.class));
                 }
             }
