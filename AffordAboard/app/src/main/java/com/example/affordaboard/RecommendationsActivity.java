@@ -123,7 +123,14 @@ public class RecommendationsActivity extends AppCompatActivity {
             // Generate other fields
             String travelDates = generateRandomDate(); // You need to implement this method according to your requirement
             String numOfPeople = String.valueOf(random.nextInt(5) + 1);
-            String numOfMula = String.valueOf(random.nextInt(10000) + 1000);
+
+            // Adjust price based on comfortScore
+            int minPrice = 50; // Define a minimum price
+            int maxPrice = 10000; // Define a maximum price
+            int priceRange = maxPrice - minPrice;
+            int comfortAdjustedRange = comfortScore * priceRange / 100; // Adjust the price range based on comfortScore
+            int price = minPrice + random.nextInt(comfortAdjustedRange + 1); // Generate a price in the adjusted range
+            String numOfMula = String.valueOf(price);
 
             // Create a recommendation and add it to the list
             Recommendation recommendation = new Recommendation(userName, travelLocation, travelDates, numOfPeople, numOfMula);
