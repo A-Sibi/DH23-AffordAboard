@@ -44,9 +44,17 @@ public class AddJourneyDialogFragment extends DialogFragment {
 
                     FeedActivity activity = (FeedActivity) getActivity();
                     activity.addNewJourney(travelLocation, travelDates, numberOfPeople, young_mula_baby);
-                    FlightDataFetcher flightDataFetcher = new FlightDataFetcher();
-                    flightDataFetcher.fetchFlights(Constants.ACCESS_KEY, "Ljubljana", travelLocation, numberOfPeople, young_mula_baby);
 
+                    try {
+                        API.APICallTask api = new API.APICallTask(whereFromEditText.getText().toString().substring(0,3).toUpperCase(),
+                                whereToEditText.getText().toString().substring(0,3).toUpperCase(), whenFromEditText.getText().toString(),
+                                whenToEditText.getText().toString(), Integer.parseInt(numberOfPeople), Integer.parseInt(young_mula_baby));
+
+                        api.execute();
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 })
                 .setNegativeButton("Cancel", (dialog, id) -> AddJourneyDialogFragment.this.getDialog().cancel());
 
