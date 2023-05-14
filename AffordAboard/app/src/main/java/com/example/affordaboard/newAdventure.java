@@ -24,7 +24,7 @@ public class newAdventure extends AppCompatActivity {
     public void letsGo(View view) {
         //TODO: fetch airplane ticket
         FlightDataFetcher flightDataFetcher = new FlightDataFetcher();
-        flightDataFetcher.fetchFlights(departureLocation, destinationLocation, departureDate, returnDate);
+        flightDataFetcher.fetchFlights(Constants.ACCESS_KEY, departureLocation, destinationLocation, departureDate, returnDate);
     }
 
     public void back(View view) {

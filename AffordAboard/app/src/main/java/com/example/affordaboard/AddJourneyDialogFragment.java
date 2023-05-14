@@ -16,7 +16,6 @@ public class AddJourneyDialogFragment extends DialogFragment {
     private EditText whereToEditText;
     private EditText whenFromEditText;
     private EditText whenToEditText;
-
     private EditText numOfPeopleEditText;
     private EditText numOfMulaEditText;
 
@@ -45,6 +44,9 @@ public class AddJourneyDialogFragment extends DialogFragment {
 
                     FeedActivity activity = (FeedActivity) getActivity();
                     activity.addNewJourney(travelLocation, travelDates, numberOfPeople, young_mula_baby);
+                    FlightDataFetcher flightDataFetcher = new FlightDataFetcher();
+                    flightDataFetcher.fetchFlights(Constants.ACCESS_KEY, "Ljubljana", travelLocation, numberOfPeople, young_mula_baby);
+
                 })
                 .setNegativeButton("Cancel", (dialog, id) -> AddJourneyDialogFragment.this.getDialog().cancel());
 
