@@ -47,6 +47,12 @@ public class ProfileActivity extends AppCompatActivity {
 
         initializeViews();
 
+        ImageView imageViewProfile = findViewById(R.id.imageViewProfile);
+        Animation breatheAnimation = AnimationUtils.loadAnimation(this, R.anim.breathing_animation);
+        Animation rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate_animation);
+        imageViewProfile.startAnimation(breatheAnimation);
+        imageViewProfile.startAnimation(rotateAnimation);
+
         // Load and set the profile picture
         SharedPreferences preferences = getSharedPreferences("MyApp", MODE_PRIVATE);
         String email = preferences.getString("email", null);
