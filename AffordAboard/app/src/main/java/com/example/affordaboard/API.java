@@ -13,6 +13,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class API {
+
+    public interface APICallback {
+        void onAPIResponse(String responseData);
+    }
     public static class APICallTask  extends AsyncTask<Void, Void, String> {
         private String departureLocation;
         private String destinationLocation;
@@ -20,15 +24,18 @@ public class API {
         private String returnDate;
         private int adults;
         private int maxPrice;
+        private APICallback callback;
+        private String jsonString;
 
         public APICallTask(String departureLocation, String destinationLocation, String departureDate,
-                           String returnDate, int adults, int maxPrice) {
+                           String returnDate, int adults, int maxPrice, APICallback callback) {
             this.departureLocation = departureLocation;
             this.destinationLocation = destinationLocation;
             this.departureDate = departureDate;
             this.returnDate = returnDate;
             this.adults = adults;
             this.maxPrice = maxPrice;
+            this.callback = callback;
         }
 
         @Override
@@ -69,7 +76,7 @@ public class API {
                 // Make the API request for flight-offers-search
                 String responseData = sendGetRequest(flightOffersUrl + "?" + params, authorizationHeader);
                 Log.d("Response Data", responseData);
-
+                this.jsonString = responseData;
                 return responseData;
             } catch (Exception e) {
                 e.printStackTrace();
@@ -77,9 +84,15 @@ public class API {
             }
         }
 
+        public String getJsonString() {
+            return this.jsonString;
+        }
+
         @Override
         protected void onPostExecute(String responseData) {
-            // Handle the API response data here
+            if (callback != null) {
+                callback.onAPIResponse(responseData);
+            }
         }
 
         private static String sendPostRequest(String url, String payload) throws IOException {
